@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchProducts } from "../../features/products/productSlice";
 import type { AppDispatch, RootState} from "../../app/store";
+import type { Product } from "../../features/products/productTypes";
+import { addToCart } from "../../features/cart/cartSlice";
 
 const ProductList: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +21,14 @@ const ProductList: React.FC = () => {
     if(loading) return <p>Loading Products...</p>
     if(error) return <p>Error: {error}</p>
 
+    const handleAddToCart = (product: Product) => {
+        dispatch(addToCart({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: 1,
+        }))
+    }
     return(
         <div className="grid grid-cols-2 gap-4 p-4">
             {products.map(product=>(
@@ -31,6 +41,10 @@ const ProductList: React.FC = () => {
 
                     <h2 className="text-lg font-semibold">{product.name}</h2>
                     <p className="text-sm text-gray-600">{product.price.toFixed(2)}</p>
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded"
+                    onClick={()=>handleAddToCart(product)}>
+                        Add to cart
+                    </button>
                 </div>
             ))}
         </div>
