@@ -14,9 +14,18 @@ const cartSlice = createSlice({
             const existing = state.items.find(
                 item => item.id === action.payload.id)
             if (existing){
-                existing.quantity += action.payload.quantity
+                const newQty = existing.quantity + action.payload.quantity
+
+                if(newQty > 10 ){
+                    existing.quantity = 10
+                }else{
+                    existing.quantity = newQty
+                }
+
             }else{
-                state.items.push(action.payload)
+                state.items.push({...action.payload , 
+                    quantity : Math.min(action.payload.quantity , 10),
+                })
             }
 
         },
@@ -36,7 +45,8 @@ const cartSlice = createSlice({
             action: PayloadAction<{id: string ; quantity: number}>) => {
                 const item = state.items.find(item => item.id === action.payload.id)
 
-                if(item){
+                if(item && action.payload.quantity >=1 
+                    && action.payload.quantity<= 10 ){
                     item.quantity = action.payload.quantity
                 }
         },
