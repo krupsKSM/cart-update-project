@@ -1,6 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Cart from "./components/cart/Cart"
-import ProductList from "./components/products/ProductList"
 import Header from "./components/common/Header"
 import Home from "./pages/Home"
 import CartPage from "./pages/CartPage"
