@@ -12,7 +12,7 @@ const Cart: React.FC = () => {
     }
 
     const handleQuantityChange = (id: string, quantity: number) => {
-        if (quantity > 0) {
+        if (quantity > 0 && quantity <=10) {
             dispatch(updateQuantity({ id, quantity }))
         }
     }
@@ -41,9 +41,12 @@ const Cart: React.FC = () => {
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <input type="number" min={1} value={item.quantity} onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
+                            <input type="number" min={1} max= {10} 
+                            value={item.quantity} onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
                                 className="w-16 border px-2 py-1 rounded" />
-
+                            {item.quantity >=10 && (
+                                <p className="text-xs text-red-800">Max 10 items allowed</p>
+                            ) }
                             <button onClick={() => handleRemove(item.id)}
                                 className="text-red-600 text-sm">
                                 Remove
