@@ -22,6 +22,7 @@ const ProductList: React.FC = () => {
     if(error) return <p>Error: {error}</p>
 
     const handleAddToCart = (product: Product) => {
+        console.log("Adding to cart:", product.name)
         dispatch(addToCart({
             id: product.id,
             name: product.name,
@@ -40,7 +41,7 @@ const ProductList: React.FC = () => {
                     className="w-full h-40 object-contain mb-2" />
 
                     <h2 className="text-lg font-semibold">{product.name}</h2>
-                    <p className="text-sm text-gray-600">{product.price.toFixed(2)}</p>
+                    <p className="text-sm text-gray-600">Rs {product.price.toFixed(2)}</p>
                     <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded"
                     onClick={()=>handleAddToCart(product)}>
                         Add to cart

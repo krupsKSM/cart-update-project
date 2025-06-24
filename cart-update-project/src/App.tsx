@@ -1,3 +1,4 @@
+import Cart from "./components/cart/Cart"
 import ProductList from "./components/products/ProductList"
 
 const App: React.FC = ()=>{
@@ -9,6 +10,7 @@ const App: React.FC = ()=>{
           Product catalog
         </h1>
         <ProductList/>
+        <Cart />
       </div>
     </>
   )

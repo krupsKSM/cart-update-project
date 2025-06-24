@@ -22,7 +22,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
         const res = await axios.get<ApiProduct[]>('https://fakestoreapi.com/products')
 
         return res.data.map((item: any)=>({
-            id: item.id.toString,
+            id: item.id.toString(),
             name: item.title,
             price: item.price,
             image: item.image,
